@@ -420,7 +420,6 @@ On receiving the `issuance_token`:
   {
     "aud": "https://rp.example",
     "nonce": "259c5eae-486d-4b0f-b666-2a5b5ce1c925",
-    "salt": "kR7fY9mP3xQ8wN2vL5jH6tZ1cB4nM9sD8fG3hJ7kL2p",
     "iat": 1724083260,
     "sd_hash": "X9yH0Ajrdm1Oij4tWso9UzzKJvPoDxwmuEcO3XAdRC0"
   }
