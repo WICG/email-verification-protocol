@@ -217,14 +217,14 @@ An example payload
 ```
 
 
-- **3.5** - the browser POSTs to the `issuance_endpoint` of the issuer with 1P cookies with a content-type of `application/x-www-form-urlencoded` containing a `request_token` parameter set to the signed JWT and the `Sec-Fetch-Dest` header set to `email-verification`. 
+- **3.5** - the browser POSTs to the `issuance_endpoint` of the issuer with 1P cookies with a content-type of `application/x-www-form-urlencoded` containing a `request_token` parameter set to the signed JWT and the `Sec-Fetch-Dest` header set to `emailverification`. 
 
 ```bash
 POST /email-verification/issuance HTTP/1.1
 Host: accounts.issuer.example
 Cookie: session=...
 Content-Type: application/x-www-form-urlencoded
-Sec-Fetch-Dest: email-verification
+Sec-Fetch-Dest: emailverification
 
 request_token=eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVC...
 ```
@@ -236,7 +236,7 @@ On receipt of a token request:
 - **4.1** - the issuer MUST verify the request headers:
 
   - `Content-Type` is `application/x-www-form-urlencoded`
-  - `Sec-Fetch-Dest` is `email-verification`
+  - `Sec-Fetch-Dest` is `emailverification`
 
 - **4.2** - the issuer MUST verify the request_token by:
 
@@ -312,7 +312,7 @@ When the request does not include the required `Content-Type: application/x-www-
 
 ### 4.5.2 Invalid Sec-Fetch-Dest Header
 
-When the request does not include the required `Sec-Fetch-Dest: email-verification` header:
+When the request does not include the required `Sec-Fetch-Dest: emailverification` header:
 
 **HTTP 400 Bad Request**
 ```json
