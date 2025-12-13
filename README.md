@@ -24,7 +24,7 @@ User privacy is enhanced as the issuer does not learn which web application is m
 
 ## User Experience
 
-Verified Email Release: The user navigates to any website that requires a verified email address and an input field to enter the email address. The user focusses on the input field and the browser provides one or emails for the user to select based on emails the user has provided previously to the browser. The user selects a verified email and the app proceeds having obtained the verified email.
+Verified Email Release: The user navigates to any website that requires a verified email address and an input field to enter the email address. The user focusses on the input field and the browser provides one or more emails for the user to select based on emails the user has provided previously to the browser. The user selects a verified email and the app proceeds having obtained the verified email.
 
 > Are emails that can be verified decorated by the browser in the autocomplete UI?
 > What UX is presented to the user when the app gets a verified email so the user knows it is already verified?
