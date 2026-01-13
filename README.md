@@ -378,19 +378,18 @@ For internal server errors or temporary unavailability:
 
 ## 5. Token Presentation
 
-On receiving the `issuance_token`:
+On receiving the `issuance_token` thr browser:
 
-- **5.1** - the browser MUST verify the SD-JWT per (SD-JWT spec) by:
+- **5.1** - MUST verify the SD-JWT per (SD-JWT spec) by:
 
   - parsing the SD-JWT into header, payload, and signature components
   - confirming the presence of, and extracting the `alg` and `kid` fields from the SD-JWT header, and the `iss`, `iat`, `cnf`, `email`, and `email_verified` claims from the payload
-  - parsing the email domain from the `email` claim and looking up the `TXT` record for `_email-verification.$EMAIL_DOMAIN` to verify the `iss` claim matches the issuer identifier in the DNS record
+  - parsing the email domain from the `email` claim and looking up the `TXT` record for `_email-verification.$EMAIL_DOMAIN` to verify the `iss` claim (prefixed by `https://`) matches the issuer identifier in the DNS record
   - fetching the issuer's public keys from the `jwks_uri` specified in the `.well-known/email-verification` file
   - verifying the SD-JWT signature using the public key identified by `kid` from the JWKS with the `alg` algorithm
   - verifying the `iat` claim is within 60 seconds of the current time
   - verifying the `email` claim matches the email address the user selected
   - verifying the `email_verified` claim is true
-
 
 - **5.2** - the browser then creates an SD-JWT+KB by:
 
@@ -444,21 +443,13 @@ The RP server MUST verify the SD-JWT+KB by:
 
 - **6.3** - the RP verifies the KB-JWT by:
   - parsing the KB-JWT into header, payload, and signature components
-  - confirming the presence of, and extracting the `alg` field from the KB-JWT header, and the `aud`, `nonce`, `iat`, and `sd_hash` claims from the payload
+  - confirming the presence of, and extracting the `alg` field from the KB-JWT header, and the `aud`, `nonce`, `iat`, and `sd_hash` claims from the KB payload
   - verifying the `aud` claim matches the RP's origin
   - verifying the `nonce` claim matches the nonce from the RP's session with the web page
   - verifying the `iat` claim is within a reasonable time window 
   - computing the SHA-256 hash of the SD-JWT and verifying it matches the `sd_hash` claim
 
-- **6.4** - the RP verifies the SD-JWT by:
-  - parsing the SD-JWT into header, payload, and signature components
-  - confirming the presence of, and extracting the `alg` and `kid` fields from the SD-JWT header, and the `iss`, `iat`, `cnf`, `email`, and `email_verified` claims from the payload
-  - parsing the email domain from the `email` claim and looking up the `TXT` record for `_email-verification.$EMAIL_DOMAIN` to verify the `iss` claim matches the issuer identifier in the DNS record
-  - fetching the issuer's public keys from the `jwks_uri` specified in the `.well-known/email-verification` file
-  - verifying the SD-JWT signature using the public key identified by `kid` from the JWKS with the `alg` algorithm
-  - verifying the `iss` claim exactly matches the issuer identifier from the DNS record
-  - verifying the `iat` claim is within a reasonable time window
-  - verifying the `email_verified` claim is true
+- **6.4** - the RP verifies the SD-JWT by following steps **5.1** independently.
 
 - **6.5** - the RP verifies the KB-JWT signature using the public key from the `cnf` claim in the SD-JWT with the `alg` algorithm from the KB-JWT header
 
