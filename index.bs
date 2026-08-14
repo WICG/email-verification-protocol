@@ -233,7 +233,7 @@ The presentation token (EVT+KB) is bound to a specific `nonce` and `audience` (v
 Verifiers MUST verify:
 1.  The `audience` matches their origin.
 2.  The `nonce` matches the one they generated for the form presentation.
-3.  The `exp` claim has not expired.
+3.  The `exp` claim, if present, has not expired.
 
 This prevents an attacker from intercepting an EVT+KB and replaying it to another site or in a different context.
 
